@@ -208,6 +208,10 @@ class GitWorkingCopy(common.BaseWorkingCopy):
             # Specific revision, so we only fetch.  Pull is fetch plus
             # merge, which is not possible here.
             argv = ["fetch"]
+        elif 'reset' in self.source:
+            # added this to real force update and overwrite local changes
+            self.run_git(["clean","-f","-d"], cwd=path)
+            argv = ["reset","--hard","origin/master"]    
         else:
             argv = ["pull"]
         cmd = self.run_git(argv, cwd=path)
