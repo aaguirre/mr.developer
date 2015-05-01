@@ -210,7 +210,7 @@ class GitWorkingCopy(common.BaseWorkingCopy):
             argv = ["fetch"]
         elif 'reset' in self.source:
             # added this to real force update and overwrite local changes
-            self.run_git(["clean","-f","-d"], cwd=path)
+
             argv = ["reset","--hard","origin/master"]    
         else:
             argv = ["pull"]
